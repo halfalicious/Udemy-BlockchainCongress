@@ -9,9 +9,8 @@
 pragma solidity ^0.4.13;
 
 //
-// Summary:
-//      Simple class providing enforced ownership functionality, including
-//      ownership transfer.
+// Simple smart contract providing enforced ownership functionality, including
+// ownership transfer.
 //
 contract Ownership {
     address internal owner;
@@ -31,7 +30,7 @@ contract Ownership {
 }
 
 //
-// Simple class which models a Blockchain Congress. Initialized with a Congress leader
+// Simple smart contract which models a Blockchain Congress. Initialized with a Congress leader
 // and funded with Ether, the leader can add members and transfer ownership to another
 // member. Members can make proposals (essentially payouts to members along with optional
 // transactions to execute) and vote on them, and proposals with sufficient votes are
