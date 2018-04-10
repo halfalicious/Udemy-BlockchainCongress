@@ -1,15 +1,16 @@
 //
-// Simple Blockchain Congress smart contract created as a part of the Udemy class: 
+// Simple Shareholders Association smart contract created as a part of the Udemy class: 
 //
 //      "How to build Decentralized Auto Democracy DAO in Ethereum Blockchain"
 //
 //      https://www.udemy.com/how-to-build-decentralized-democracy-dao-in-ethereum-blockchain/learn/v4/content
 //
+//
 
 pragma solidity ^0.4.13;
 
 //
-// TOOD: Comment
+// Simple smart contract used to track balances of a voting token.
 //
 contract Token {
     mapping(address => uint) public balanceOf;
@@ -43,12 +44,27 @@ contract Ownership {
 }
 
 //
-// TODO
+// Simple contract which models a Shareholders Association where shareholders
+// can create and vote on proposals, which are essentially payouts from the
+// Association to a beneficiary along with an optional transaction to execute.
+// The Association is funded with Ether at contract creation or via transactions.
+// 
+// This contract is very similar to the Blockchain Congress contract, only with
+// members being replaced with Shareholders. Effectively this means that rather than
+// one member one vote, shareholders vote with their token balance (where the balance
+// is tracked in another contract called Token). So for example, a shareholder with
+// a token balance of 100 will have a vote that counts 10x more than a shareholder
+// whose balance is only 10.
+//
+// As was the case with the Blockchain Congress contract, proposals are voted on until
+// their voting period expires, at which point they can be executed (provided the vote
+// count meets the min quorum and there are more weighted pass votes than fail votes).
 //
 contract Association is Ownership {
     // Time period after proposal is made during which participants vote
     uint internal votingPeriodMinutes;
 
+    // Address of Token contract which tracks shareholder balances
     Token internal sharesAddress;
 
     // Proposal storage
@@ -86,7 +102,6 @@ contract Association is Ownership {
     );
 
     modifier shareholdersOnly() {
-        // TODO: DOes this work? If so, how does this work? 
         require(sharesAddress.balanceOf(msg.sender) != 0);
         _;
     }
@@ -259,7 +274,14 @@ contract Association is Ownership {
         proposal.passed = true;
         proposal.executed = true;
         require(proposal.beneficiary.call.value(proposal.payoutInWei)(_transactionByteCode));
-        OnExecuteProposal(_proposalId, proposal.beneficiary, proposal.payoutInWei, proposal.currentResult, proposal.voteCount);
+
+        OnExecuteProposal(
+            _proposalId,
+            proposal.beneficiary,
+            proposal.payoutInWei,
+            proposal.currentResult,
+            proposal.voteCount
+        );
     }
 
     function getVotingTimeLeft(uint _proposalId) shareholdersOnly constant public returns (uint) {
