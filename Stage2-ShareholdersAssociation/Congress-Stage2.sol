@@ -10,7 +10,8 @@
 pragma solidity ^0.4.13;
 
 //
-// Simple smart contract used to track balances of a voting token.
+// Simple smart contract used to track shareholder balances of a voting
+// token.
 //
 contract Token {
     mapping(address => uint) public balanceOf;
@@ -22,9 +23,8 @@ contract Token {
 }
 
 //
-// Summary:
-//      Simple class providing enforced ownership functionality, including
-//      ownership transfer.
+// Simple smart contract providing enforced ownership functionality, including
+// ownership transfer.
 //
 contract Ownership {
     address internal owner;
