@@ -1,0 +1,4 @@
+# Udemy-BlockchainCongress
+This repo contains my coding exercises and unit tests for the Udemy course "How to Build A Decentralized Democracy Dao in Ethereum Blockchain" (https://www.udemy.com/how-to-build-decentralized-democracy-dao-in-ethereum-blockchain/learn/v4/content). The purpose of the course is to build a Blockchain Congress (essentially a smart contract where members can propose and vote on payouts to other members) and a Shareholder association (which is an extension of the Blockchain Congress where members, now called shareholders, can instead vote with token balances).
+
+The coding exercises consist of smart contracts written in Solidity and associated Truffle JavasScript tests. The Truffle tests have all been successfully run (i.e. tests complete and pass) via Truffle 3.4.7 and TestRPC.
